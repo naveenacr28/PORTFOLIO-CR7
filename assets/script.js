@@ -12,20 +12,36 @@ window.addEventListener('scroll', () => {
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Contact form stub (replace with your endpoint if needed)
+// AJAX Contact form (Formspree integration)
 const form = document.getElementById('contactForm');
 const statusEl = document.getElementById('formStatus');
-form.addEventListener('submit', async (e) => {
+
+form.addEventListener('submit', async function (e) {
     e.preventDefault();
+
     statusEl.textContent = 'Sending...';
-    try {
-        // Replace with a real endpoint (Apps Script/Formspree/Flask)
-        await new Promise(r => setTimeout(r, 800));
-        form.reset();
-        statusEl.textContent = 'Thanks! Your message is sent.';
-    } catch (err) {
-        statusEl.textContent = 'Oops, failed to send. Try again.';
-    }
+
+    const data = new FormData(form);
+
+    fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            form.reset();
+            statusEl.textContent = "Thanks! Your message was sent.";
+        } else {
+            response.json().then(data => {
+                statusEl.textContent = data.error || "Oops! There was a problem submitting your form";
+            });
+        }
+    }).catch(() => {
+        statusEl.textContent = "Oops! There was a problem submitting your form";
+    });
 });

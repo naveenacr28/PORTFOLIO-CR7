@@ -255,13 +255,25 @@
     <section id="contact" class="section alt">
         <h2>Contact</h2>
         <div class="grid two">
-            <form id="contactForm" class="card form">
-                <label>Name<input type="text" name="name" required></label>
-                <label>Email<input type="email" name="email" required></label>
-                <label>Message<textarea name="message" rows="4" required></textarea></label>
+            <form id="contactForm" action="https://formspree.io/f/xkgekvjb" method="POST" class="card form">
+                <label>
+                    Name
+                    <input type="text" name="name" required>
+                </label>
+                <label>
+                    Email
+                    <input type="email" name="email" required>
+                </label>
+                <label>
+                    Message
+                    <textarea name="message" rows="4" required></textarea>
+                </label>
                 <button class="btn" type="submit">Send Message</button>
                 <p id="formStatus" class="status" role="status" aria-live="polite"></p>
             </form>
+
+
+
             <div>
                 <p><strong>Email:</strong> <a href="mailto:naveenacr07022005@gmail.com">naveenacr07022005@gmail.com</a>
                 </p>
@@ -277,12 +289,10 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p>© <span id="year"></span> NAVEENA C R. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <p class="copyright">
+            &copy; 2025 NAVEENA C R. All rights reserved.
+        </p>
+        <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
     </footer>
 
     <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
